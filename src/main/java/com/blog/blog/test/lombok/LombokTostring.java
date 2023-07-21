@@ -3,7 +3,7 @@ package com.blog.blog.test.lombok;
 public class LombokTostring {
   
   public void toStringTest() {
-    LombokUser user = new LombokUser();
+    LombokUser user = new LombokUser("jurio108", "1234");
 
     user.setId(1);
     user.setUsername("jurio108");

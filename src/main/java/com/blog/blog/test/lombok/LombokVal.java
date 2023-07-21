@@ -25,6 +25,8 @@ public class LombokVal {
       System.out.printf("%d: %s\n", entry.getKey(), entry.getValue());
     }
 
+    System.out.printf("foo1 : ", foo1.length(), "foo2 : ", foo2.length());
+
     return null;
   }
 }
