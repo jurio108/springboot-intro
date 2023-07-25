@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blog.blog.test.lombok.LombokEqualsAndHashCode;
+import com.blog.blog.test.lombok.LombokSneakyThrows;
+import com.blog.blog.test.lombok.LombokUser;
+
+// import lombok.var;
+
 @RestController
 public class TestController {
   
@@ -16,7 +22,7 @@ public class TestController {
     return "<h1>hello</h1>";
   }
 
-  @GetMapping("/http/lombok")
+  @GetMapping("/lombok")
   public String lombokTest() {
     // Member member = new Member();
     Member member = Member.builder().username("aaa").password("ppp").email("aaa@ee.com").build();
@@ -25,6 +31,64 @@ public class TestController {
     System.out.println(TAG + "setter : " + member.getId());
 
     return "lombokTest : " + member.getId() + ", " + member.getUsername();
+  }
+
+  @GetMapping("/lombok/tostring")
+  public String lombokTostring() {
+    LombokUser user = new LombokUser("jurio108", "1234");
+
+    user.setId(1);
+    user.setUsername("jurio108");
+    user.setPassword("1234");
+    user.setScores(new int[]{100, 90, 95});
+
+    // User(id=1, username=jurio108, password=1234, scores=[100, 90, 95])
+    System.out.println(user);
+
+    return "ok";
+  }
+
+  @GetMapping("/lombok/hash")
+  public String lombokEqualsAndHashCode() {
+    LombokEqualsAndHashCode hash = new LombokEqualsAndHashCode("jurio108", 100);
+    LombokEqualsAndHashCode hash2 = new LombokEqualsAndHashCode("jurio108", 100);
+    
+    System.out.println(hash.equals(hash2));
+    System.out.println(hash.hashCode());
+    System.out.println(hash2.hashCode());
+
+    return "ok";
+  }
+
+  @GetMapping("/lombok/args")
+  public String lombokArgs() {
+    LombokUser user = new LombokUser("jurio108", "1234");
+    LombokUser user2 = new LombokUser();
+
+    user.setId(1);
+    user.setUsername("jurio108");
+    user.setPassword("1234");
+    user.setScores(new int[]{100, 90, 95});
+
+    // LombokUser(id=1, username=jurio108, password=1234, scores=[100, 90, 95])
+    System.out.println(user);
+    // LombokUser(id=0, username=null, scores=null)
+    System.out.println(user2);
+
+    return "ok";
+  }
+
+  @GetMapping("/lombok/sneacky")
+  public String lombokSneacky() {
+    LombokSneakyThrows sneaky = new LombokSneakyThrows();
+
+    try {
+      sneaky.testSneackThrows2();
+    } catch (Exception e) {
+      System.err.println(e.getMessage());
+    }
+
+    return "ok";
   }
 
 

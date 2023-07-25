@@ -23,5 +23,4 @@ public class LombokCleanup {
       System.out.println(e);
     }
   }
-
 }
