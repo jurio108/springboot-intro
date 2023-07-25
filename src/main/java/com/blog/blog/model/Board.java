@@ -63,7 +63,7 @@ public class Board {
   
   // mappedBy : column 생성하지 않음
   // FetchType.LAZY : 지연로딩(data조회를 바로 하지 않음, 조인하지 않고 따로 조회)
-  @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-  @JoinColumn(name = "replyId")
+  // @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
   private List<Reply> reply;
 }

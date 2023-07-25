@@ -2,12 +2,14 @@ package com.blog.blog.model;
 
 import java.sql.Timestamp;
 
-import org.hibernate.annotations.ColumnDefault;
+// import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,6 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
+// @DynamicInsert  // Insert 시 Null인 컬럼 제외
 public class User {
   
   @Id
@@ -36,8 +39,9 @@ public class User {
   @Column(nullable = false, length = 50)
   private String email;
 
-  @ColumnDefault("'user'")
-  private String role;
+  // @ColumnDefault("'user'")
+  @Enumerated(EnumType.STRING)  // enum type 설정
+  private UserRole role;
 
   @CreationTimestamp
   private Timestamp createDate;
