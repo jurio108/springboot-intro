@@ -30,6 +30,12 @@
 # git
   .git이 없으므로 git init 부터 시작
 
+# JPA
+  FetchType.EAGER : 즉시로딩(조인 후 쿼리 1개)
+  FetchType.LAZY : 지연로딩(data조회를 바로 하지 않음, 조인하지 않고 따로 조회)
+
+  XXXToOne의 경우 실무에서는 그냥 LAZY 사용
+  : 즉시로딩 사용항
 
 ==================================================================================
 # DB 세팅 application.properties 기준
@@ -54,4 +60,3 @@ spring.jpa.hibernate.ddl-auto=update
 
 # JPA의 구현체인 Hibernate가 동작하면서, 발생한 SQL의 가독성을 높여줌.
 spring.jpa.properties.hibernate.format_sql=true
-

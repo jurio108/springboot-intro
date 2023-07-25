@@ -9,5 +9,7 @@ public class LombokArgsConstructor {
     .username("jurio108")
     .id(1)
     .build();
+
+    System.out.println(user);
   }
 }
