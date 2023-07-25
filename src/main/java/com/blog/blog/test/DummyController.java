@@ -1,21 +1,26 @@
 package com.blog.blog.test;
 
 import java.util.List;
-import java.util.function.Supplier;
+// import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+// import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.model.User;
 import com.blog.blog.model.UserRole;
 import com.blog.blog.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 @RestController
 public class DummyController {
@@ -72,8 +77,28 @@ public class DummyController {
     return userRepository.findAll(pageable).getContent();
   }
 
+  @Transactional  // 메서드가 끝날때 트랜잭션 종료되면서 자동 commit, 더티체킹(Persistence Context)
+  @PutMapping("dummy/user/{id}")
+  public User updateUser(@PathVariable int id, @RequestBody User user) {
+    User selectedUser = this.user(id);
+    selectedUser.setPassword(user.getPassword());
+    selectedUser.setEmail(user.getEmail());
+
+    // User updatedUser = userRepository.save(selectedUser);
+    // return updatedUser;
+
+    return selectedUser;
+  }
+
+  @DeleteMapping("dummy/user/{id}")
+  public String deleteUser(@PathVariable int id) {
+    User selectedUser = this.user(id);
+    userRepository.deleteById(selectedUser.getId());
+    return "delete complete";
+  }
+
   @PostMapping("dummy/join")
-  public String join(User user) {
+  public String join(@RequestBody User user) {
     user.setRole(UserRole.USER);
     userRepository.save(user);
 
