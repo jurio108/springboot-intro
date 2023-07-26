@@ -19,7 +19,7 @@ let index = {
       contentType : 'application/json; charset=utf-8',
       // dataType : 'json'  // 응답받을시 javascript obj 변환
     }).done(function(res) {
-      if (res.status == 'OK') {
+      if (res.status == 200) {
         console.log(res);
         alert('회원가입이 완료되었습니다.');
         location.href = '/blog/user/loginForm';
