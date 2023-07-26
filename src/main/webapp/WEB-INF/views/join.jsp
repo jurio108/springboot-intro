@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
 
 	<form>
 		<div class="form-group">
@@ -20,4 +20,4 @@
 
 </div>
 
-<script src="/js/join.js"></script>
+<script src="/js/join.js"></script> -->
