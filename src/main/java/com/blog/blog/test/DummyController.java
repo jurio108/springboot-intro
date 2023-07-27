@@ -15,16 +15,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.dto.ResponseDto;
-import com.blog.blog.model.Board;
 import com.blog.blog.model.User;
 import com.blog.blog.model.UserRole;
 import com.blog.blog.repository.UserRepository;
 import com.blog.blog.test.dto.TestJpqlDto;
 import com.blog.blog.test.service.TestJpqlService;
-import com.google.gson.JsonObject;
 
 import jakarta.transaction.Transactional;
 
@@ -114,15 +113,13 @@ public class DummyController {
     return "join complete";
   }
 
-  // @GetMapping("dummy/jpql")
-  // public ResponseDto<List<TestJpqlDto>> testJpql() {
-  //   return new ResponseDto<List<TestJpqlDto>>(HttpStatus.OK.value(), testJpqlService.testJpql());
-  // }
-
   @GetMapping("dummy/jpql")
-  public List<TestJpqlDto> testJpql() {
-    List<TestJpqlDto> result = testJpqlService.testJpql();
+  public ResponseDto<List<TestJpqlDto>> testJpql() {
+    return new ResponseDto<List<TestJpqlDto>>(HttpStatus.OK.value(), testJpqlService.testJpql());
+  }
 
-    return result;
+  @GetMapping("dummy/querydsl")
+  public List<User> testQuerydsl(@RequestParam int id) {    
+    return testJpqlService.testQuerydsl(id);
   }
 }

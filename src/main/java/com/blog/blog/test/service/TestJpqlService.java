@@ -1,24 +1,17 @@
 package com.blog.blog.test.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blog.blog.model.User;
+import com.blog.blog.repository.custom.UserRepositoryImpl;
 import com.blog.blog.test.dto.TestJpqlDto;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-import jakarta.transaction.Transactional;
 
 @Service
 public class TestJpqlService {
@@ -48,6 +41,9 @@ public class TestJpqlService {
   @PersistenceContext
   private EntityManager em;
 
+  @Autowired
+  private UserRepositoryImpl userRepositoryImpl;
+
   @SuppressWarnings("unchecked")
   public List<TestJpqlDto> testJpql() {
     /**
@@ -70,5 +66,9 @@ public class TestJpqlService {
     List<TestJpqlDto> result = query.getResultList();
 
     return result;
+  }
+
+  public List<User> testQuerydsl(int id) {    
+    return userRepositoryImpl.selectUsers(id);
   }
 }
