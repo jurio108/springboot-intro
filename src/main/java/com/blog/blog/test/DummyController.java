@@ -119,7 +119,7 @@ public class DummyController {
   }
 
   @GetMapping("dummy/querydsl")
-  public List<User> testQuerydsl(@RequestParam int id) {    
-    return testJpqlService.testQuerydsl(id);
+  public ResponseDto<List<User>> testQuerydsl(@RequestParam int id) {
+    return new ResponseDto<List<User>>(HttpStatus.OK.value(), testJpqlService.testQuerydsl(id));
   }
 }
