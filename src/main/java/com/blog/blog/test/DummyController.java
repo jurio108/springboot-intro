@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blog.blog.dto.ResponseDto;
+import com.blog.blog.model.Board;
 import com.blog.blog.model.User;
 import com.blog.blog.model.UserRole;
 import com.blog.blog.repository.UserRepository;
+import com.blog.blog.test.dto.TestJpqlDto;
+import com.blog.blog.test.service.TestJpqlService;
+import com.google.gson.JsonObject;
 
 import jakarta.transaction.Transactional;
 
@@ -27,6 +33,9 @@ public class DummyController {
   
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private TestJpqlService testJpqlService;
 
   @GetMapping("dummy/user/{id}")
   public User user(@PathVariable int id) {
@@ -103,5 +112,17 @@ public class DummyController {
     userRepository.save(user);
 
     return "join complete";
+  }
+
+  // @GetMapping("dummy/jpql")
+  // public ResponseDto<List<TestJpqlDto>> testJpql() {
+  //   return new ResponseDto<List<TestJpqlDto>>(HttpStatus.OK.value(), testJpqlService.testJpql());
+  // }
+
+  @GetMapping("dummy/jpql")
+  public List<TestJpqlDto> testJpql() {
+    List<TestJpqlDto> result = testJpqlService.testJpql();
+
+    return result;
   }
 }
