@@ -1,19 +1,25 @@
 package com.blog.blog.test;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.test.lombok.LombokEqualsAndHashCode;
 import com.blog.blog.test.lombok.LombokSneakyThrows;
 import com.blog.blog.test.lombok.LombokUser;
+import com.blog.blog.test.service.LambdaService;
 
 // import lombok.var;
 
 @RestController
 public class TestController {
+
+  @Autowired
+  private LambdaService lambdaService;
   
   private static final String TAG = "TestController : ";
 
@@ -110,5 +116,15 @@ public class TestController {
   @DeleteMapping("/http/delete")
   public String deleteTest() {
     return "delete 요청";
+  }
+
+  @GetMapping("/lambda1")
+  public int[] getFunctionalImpl(@RequestParam int x, @RequestParam int y) {
+    return lambdaService.FunctionalImpl(x, y);
+  }
+
+  @GetMapping("/lambda2")
+  public int getFunctionalImpl2(@RequestParam int x) {
+    return lambdaService.IntFunc(x);
   }
 }
