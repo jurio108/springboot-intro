@@ -19,8 +19,8 @@ public class UserApiController {
   @Autowired
   private UserService userService;
 
-  @Autowired
-  private HttpSession session;
+  // @Autowired
+  // private HttpSession session;
   
   @PostMapping("/api/user")
   public ResponseDto<Integer> join(@RequestBody User user) {
@@ -29,15 +29,14 @@ public class UserApiController {
     return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
   }
 
-  // use spring security
-  @PostMapping("/api/user/login")
-  public ResponseDto<Integer> login(@RequestBody User user) {
-    User userData = userService.login(user);
+  // @PostMapping("/api/user/login")
+  // public ResponseDto<Integer> login(@RequestBody User user) {
+  //   User userData = userService.login(user);
 
-    if(userData != null) {
-      session.setAttribute("principal", userData);
-    }
+  //   if(userData != null) {
+  //     session.setAttribute("principal", userData);
+  //   }
 
-    return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
-  }
+  //   return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+  // }
 }
