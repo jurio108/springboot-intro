@@ -10,5 +10,7 @@ import com.blog.blog.repository.custom.UserRepositoryCustom;
  */
 // @Repository : 이제 생략 가능
 public interface UserRepository extends JpaRepository<User, Integer>, UserRepositoryCustom {
-
+  // JPA naming query
+  // select * from user where username = ?1 and password = ?2
+  User findByUsernameAndPassword(String username, String password);
 }
