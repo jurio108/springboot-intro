@@ -2,18 +2,14 @@ package com.blog.blog.model;
 
 import java.sql.Timestamp;
 
-// import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.blog.blog.test.dto.TestJpqlDto;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.ColumnResult;
 import jakarta.persistence.ConstructorResult;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,7 +17,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SqlResultSetMapping;
-import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -64,13 +59,13 @@ public class User {
   @Enumerated(EnumType.STRING)  // enum type 설정
   private UserRole role;
 
-  @Column(nullable = true)
-  @Embedded
-  @AttributeOverrides({
-    @AttributeOverride(name = "state", column = @Column(name = "country"))
-  })
-  @Transient
-  private UserAddress address;
+  // @Column(nullable = true)
+  // @Embedded
+  // @AttributeOverrides({
+  //   @AttributeOverride(name = "state", column = @Column(name = "country"))
+  // })
+  // @Transient
+  // private UserAddress address;
 
   @CreationTimestamp
   private Timestamp createDate;

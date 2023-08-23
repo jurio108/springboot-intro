@@ -9,10 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity  // 시큐리티 활성화 -> 기본 스프링 필터체인에 등록
 public class SecurityConfig {
-  
+
   @Bean
   BCryptPasswordEncoder encode() {
     return new BCryptPasswordEncoder();
@@ -28,7 +29,10 @@ public class SecurityConfig {
           .anyRequest().permitAll())
       .formLogin(
         login -> login
-          .loginPage("/auth/loginForm").permitAll());
+          .loginPage("/auth/loginForm").permitAll()
+          .loginProcessingUrl("/auth/loginProc")  // spring security 가 해당 url로 login 가로챔
+          .defaultSuccessUrl("/")
+        );  
 
     return http.build();
   }
