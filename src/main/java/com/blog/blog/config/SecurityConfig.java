@@ -19,6 +19,15 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
+  /**
+   * 최신버전의 spring security 에서는 아래 configure를 구현하지 않아도 됨
+   * 로그인 성공시 자동으로 로그인 사용자 정보를 생성함
+   */
+  // @Override
+  // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+  //   auth.userDetailsService(principalDetailService).passwordEncoder(encode());
+  // }
+
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
@@ -28,9 +37,9 @@ public class SecurityConfig {
           .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).authenticated()
           .anyRequest().permitAll())
       .formLogin(
-        login -> login
+        formLogin -> formLogin
           .loginPage("/auth/loginForm").permitAll()
-          .loginProcessingUrl("/auth/loginProc")  // spring security 가 해당 url로 login 가로챔
+          .loginProcessingUrl("/auth/loginProc")  // spring security 가 해당 url로 로그인 가로챔
           .defaultSuccessUrl("/")
         );  
 

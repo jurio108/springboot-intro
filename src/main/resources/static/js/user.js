@@ -1,9 +1,9 @@
 let index = {
   init: function() {
-    $("#btn-save").on("click", ()=>{
+    $("#btn-save").on("click", () => {
       this.save();
     });
-    // $("#btn-login").on("click", ()=>{
+    // $("#btn-login").on("click", () => {
     //   this.login();
     // });
   },
