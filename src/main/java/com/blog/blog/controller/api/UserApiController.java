@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.dto.ResponseDto;
 import com.blog.blog.model.User;
-import com.blog.blog.model.UserRole;
 import com.blog.blog.service.UserService;
 
-import jakarta.servlet.http.HttpSession;
+// import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class UserApiController {
@@ -22,13 +21,13 @@ public class UserApiController {
   // @Autowired
   // private HttpSession session;
   
-  @PostMapping("/api/user")
+  @PostMapping("/auth/joinProc")
   public ResponseDto<Integer> join(@RequestBody User user) {
-    user.setRole(UserRole.USER);
     userService.join(user);
     return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
   }
 
+  // without spring security
   // @PostMapping("/api/user/login")
   // public ResponseDto<Integer> login(@RequestBody User user) {
   //   User userData = userService.login(user);
