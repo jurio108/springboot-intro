@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 @Configuration
 @EnableWebSecurity  // 시큐리티 활성화 -> 기본 스프링 필터체인에 등록
 public class SecurityConfig {
@@ -35,6 +34,7 @@ public class SecurityConfig {
       .authorizeHttpRequests(
         authorize -> authorize
           .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).authenticated()
+          .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).authenticated()
           .anyRequest().permitAll())
       .formLogin(
         formLogin -> formLogin

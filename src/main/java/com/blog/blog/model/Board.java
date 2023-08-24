@@ -3,7 +3,7 @@ package com.blog.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.hibernate.annotations.ColumnDefault;
+// import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -47,7 +47,6 @@ public class Board {
   @Lob
   private String content;
 
-  @ColumnDefault("0")
   private int count;
 
   @CreationTimestamp

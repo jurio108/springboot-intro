@@ -8,10 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.blog.blog.model.User;
 
+import lombok.Getter;
+
 /**
  * spring security 로그인 요청을 가로챔
  * 완료되면 UserDetail object를 spring security 세션 저장소에 저장
  */
+@Getter
 public class PrincipalDetail implements UserDetails {
   private User user;
 

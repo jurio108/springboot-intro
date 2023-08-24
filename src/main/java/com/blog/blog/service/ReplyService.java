@@ -8,6 +8,7 @@ import com.blog.blog.repository.ReplyRepository;
 import jakarta.transaction.Transactional;
 
 public class ReplyService {
+  
   @Autowired
   private ReplyRepository replyRepository;
 
