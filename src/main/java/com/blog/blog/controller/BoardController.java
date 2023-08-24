@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.blog.blog.service.BoardService;
 
@@ -35,6 +36,18 @@ public class BoardController {
   //     return "index";
   //   }
   // }
+  
+  @GetMapping({"/board/{id}"})
+  public String board(@PathVariable int id, Model model) {
+    model.addAttribute("board", boardService.board(id));
+    return "board/detail";
+  }
+
+  @GetMapping({"/board/{id}/updateForm"})
+  public String updateForm(@PathVariable int id, Model model) {
+    model.addAttribute("board", boardService.board(id));
+    return "board/updateForm";
+  }
 
   @GetMapping({"/board/saveForm"})
   public String saveForm() {
