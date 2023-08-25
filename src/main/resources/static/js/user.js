@@ -6,6 +6,9 @@ let index = {
     // $("#btn-login").on("click", () => {
     //   this.login();
     // });
+    $("#btn-update").on("click", () => {
+      this.update();
+    });
   },
 
   save: function() {
@@ -74,6 +77,28 @@ let index = {
   //     alert('서버 오류');
   //   });
   // },
+
+  update: function() {
+    let data = {
+      id : $('#id').val(),
+      password : $('#password').val(),
+      email : $('#email').val()
+    }
+    
+    $.ajax({
+      type : 'PUT',
+      url : '/user',
+      data : JSON.stringify(data),
+      contentType : 'application/json; charset=utf-8',
+    }).done(function(res) {
+      alert('수정이 완료되었습니다.');
+      location.href = '/';
+    }).fail(function(res) {
+      var message = JSON.parse(res.responseText);
+      console.log((message));
+      alert('서버 오류');
+    });
+  },
 }
 
 index.init();

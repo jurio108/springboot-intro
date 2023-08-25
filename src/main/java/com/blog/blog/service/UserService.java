@@ -35,4 +35,18 @@ public class UserService {
   // public User login(User user) {    
   //   return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
   // }
+
+  @Transactional
+  public void update(User user) {
+    User selectUser = userRepository.findById(user.getId())
+      .orElseThrow(()->{
+        return new IllegalArgumentException("Not Found User ID : " + user.getId());
+      });
+
+    String decPassword = user.getPassword();
+    String encPassword = encode.encode(decPassword);
+
+    selectUser.setPassword(encPassword);
+    selectUser.setEmail(user.getEmail());
+  }
 }
