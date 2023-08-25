@@ -9,8 +9,6 @@ import com.blog.blog.model.User;
 import com.blog.blog.model.UserRole;
 import com.blog.blog.repository.UserRepository;
 
-
-
 @Service
 public class UserService {
   
