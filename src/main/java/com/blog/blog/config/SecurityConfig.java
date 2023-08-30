@@ -1,5 +1,7 @@
 package com.blog.blog.config;
 
+import java.util.stream.Stream;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +16,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity  // 시큐리티 활성화 -> 기본 스프링 필터체인에 등록
 public class SecurityConfig {
+
+  private static final String[] PERMIT_PATTERNS = new String[] {
+    "/api/**",
+    "/board/**"
+  };
 
   @Bean
   BCryptPasswordEncoder encode() {
@@ -40,9 +47,12 @@ public class SecurityConfig {
       .csrf(CsrfConfigurer::disable)
       .authorizeHttpRequests(
         authorize -> authorize
-          .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).authenticated()
-          .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).authenticated()
-          .anyRequest().permitAll())
+          .requestMatchers(Stream.of(PERMIT_PATTERNS)
+                            .map(AntPathRequestMatcher::antMatcher)
+                            .toArray(AntPathRequestMatcher[]::new)
+                          ).authenticated()
+          .anyRequest().permitAll()
+          )
       .formLogin(
         formLogin -> formLogin
           .loginPage("/auth/loginForm").permitAll()
